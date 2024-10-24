@@ -1,0 +1,33 @@
+# version: '3'
+# services:
+#   react-app:
+#     image: my-react-app
+#     build:
+#       context: .
+#       dockerfile: Dockerfile
+#     ports:
+#       - "9678:9678"
+#     environment:
+#       - PORT=9678
+#     volumes:
+#       - .:/smt
+version: '3'
+services:
+  react-app:
+    image: my-react-app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "9678:9678"
+    environment:
+      - PORT=9678
+      - WATCHPACK_POLLING=true  # Enable polling for hot reload in Docker
+      - CHOKIDAR_USEPOLLING=true  # Enable polling for file watching
+    volumes:
+      - ./:/smt  # Mount the current directory to /smt
+      - /smt/node_modules  # Anonymous volume for node_modules
+
+## to run 
+## docker-compose up
+##docker-compose up --build
